@@ -100,4 +100,22 @@ $raw = '<p>{{name}}</p>';
 assert(HtmlTemplate::splitOnConfirmationButtons($raw) === null);
 assertHas('{{confirmationButtons}}', HtmlTemplate::render($raw, $vars));
 
+// A shared header is rendered through the same engine: placeholders are
+// replaced, scripts are stripped, and the heading text survives in HTML.
+$header = HtmlTemplate::render(
+    '<h1 style="color:red">{{organization}}</h1><img src="https://example.org/logo.png" alt="logo"><script>alert(1)</script>',
+    $vars
+);
+assertHas('<h1', $header);
+assertHas('Testverein', $header);
+assertHas('https://example.org/logo.png', $header);
+if (str_contains($header, '<script')) throw new RuntimeException('Unsafe header HTML');
+
+// In email context, local and protocol-relative image sources are stripped —
+// they would resolve against the recipient's mail client. Booking pages keep them.
+$emailHeader = HtmlTemplate::render('<img src="/local.png"><img src="//rel.png">', [], true);
+if (str_contains($emailHeader, 'src=')) throw new RuntimeException('Local image source survived email sanitization');
+$pageHtml = HtmlTemplate::render('<img src="/local.png">');
+assertHas('<img src="/local.png"', $pageHtml);
+
 echo "mail variable and action button smoke tests passed\n";

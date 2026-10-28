@@ -27,6 +27,8 @@ jobs:
         run: php -d zend.assertions=1 -d assert.exception=1 tests/html_template_images_smoke.php
       - name: Test shared mail footer
         run: php -d zend.assertions=1 -d assert.exception=1 tests/mail_footer_wiring_smoke.php
+      - name: Test shared mail header
+        run: php -d zend.assertions=1 -d assert.exception=1 tests/mail_header_wiring_smoke.php
       - uses: actions/setup-node@v4
         with:
           node-version: '22'

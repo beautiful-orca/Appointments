@@ -174,6 +174,15 @@ const cancelPendingOptions = [
             <p class="email-vars-intro">{{ confirmationButtonsHelp }}</p>
             <p class="email-vars-intro">{{ t('appointments', 'Unavailable values are left blank. Confirmation buttons appear only in emails requiring a response.') }}</p>
             <p class="email-vars-intro">{{ t('appointments', 'If no name was entered, the name placeholder is empty and the greeting has no name.') }}</p>
+            <ComboInput
+                    type="textarea"
+                    prop-name="mailHeaderHtml"
+                    :label="t('appointments', 'Shared email header – HTML')"
+                    :store="settingsStore">
+                <template #help>
+                    {{ t('appointments', 'Automatically rendered at the top of all Appointments emails for this booking page, above the body text. Intended for a logo image, heading text or banner. Supports HTML (including h1–h4 headings and HTTPS images) and email placeholders. Mail clients may block images until recipients allow them.') }}
+                </template>
+            </ComboInput>
 			<ComboInput prop-name="mailBookingSubject" :label="t('appointments', 'Booking request – Subject')" :store="settingsStore"/>
 			<ComboInput type="textarea" prop-name="mailBookingHtml" :label="t('appointments', 'Booking request – HTML')" :store="settingsStore"/>
 			<ComboInput prop-name="mailConfirmedSubject" :label="t('appointments', 'Confirmation – Subject')" :store="settingsStore"/>

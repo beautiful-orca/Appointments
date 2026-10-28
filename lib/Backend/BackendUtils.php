@@ -106,6 +106,7 @@ class BackendUtils
     public const MAILORGANIZERSUBJECT = 'mailOrganizerSubject';
     public const MAILORGANIZERHTML = 'mailOrganizerHtml';
     public const MAILFOOTERHTML = 'mailFooterHtml';
+    public const MAILHEADERHTML = 'mailHeaderHtml';
     public const EML_CANCEL_PENDING_HOURS = 'cancelPendingHours';
     public const EML_NOTIFY_BEFORE_CANCEL_PENDING = 'notifyCancelPending';
 
@@ -1262,6 +1263,7 @@ class BackendUtils
             self::MAILORGANIZERSUBJECT => "",
             self::MAILORGANIZERHTML => "",
             self::MAILFOOTERHTML => "",
+            self::MAILHEADERHTML => "",
             self::EML_CANCEL_PENDING_HOURS => 0,
             self::EML_NOTIFY_BEFORE_CANCEL_PENDING => false,
 

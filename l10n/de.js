@@ -2,6 +2,8 @@ OC.L10N.register(
     "appointments",
     {
     "Hello," : "Hallo,",
+    "Shared email header – HTML" : "Gemeinsamer E-Mail-Header – HTML",
+    "Automatically rendered at the top of all Appointments emails for this booking page, above the body text. Intended for a logo image, heading text or banner. Supports HTML (including h1–h4 headings and HTTPS images) and email placeholders. Mail clients may block images until recipients allow them." : "Wird automatisch am Anfang aller Appointments-E-Mails dieser Buchungsseite oberhalb des Textes gerendert. Geeignet für ein Logo-Bild, Überschriftentext oder Banner. Unterstützt HTML (einschließlich h1–h4-Überschriften und HTTPS-Bilder) und E-Mail-Platzhalter. E-Mail-Programme blockieren Bilder eventuell, bis Empfänger sie zulassen.",
     "Shared email footer – HTML" : "Gemeinsamer E-Mail-Footer – HTML",
     "Automatically appended to all Appointments emails for this booking page, including booking requests, confirmations, cancellations, changes, reminders and organizer notifications. Intended for legal notices, privacy information or contact details. Supports HTML and email placeholders." : "Wird automatisch an alle Appointments-E-Mails dieser Buchungsseite angehängt, einschließlich Buchungsanfragen, Bestätigungen, Absagen, Änderungen, Erinnerungen und Benachrichtigungen an Organisierende. Geeignet für rechtliche Hinweise, Datenschutzinformationen oder Kontaktdaten. Unterstützt HTML und E-Mail-Platzhalter.",
     "If no name was entered, the name placeholder is empty and the greeting has no name." : "Wurde kein Name eingegeben, bleibt der Namensplatzhalter leer und die Anrede enthält keinen Namen.",

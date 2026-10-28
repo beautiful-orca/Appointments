@@ -398,6 +398,8 @@ class DavListener implements IEventListener
                 : $this->l10N->t("%s appointment reminder", [$org_name]);
             $tmpl->setSubject($this->customSubject($settings, BackendUtils::MAILREMINDERSUBJECT, $subject, $mailVars));
 
+            $this->prependSharedMailHeader($tmpl, $settings, $mailVars);
+
             // Cancellation reminders can also contain the native Confirm / Cancel
             // buttons. Determine their URLs before rendering custom HTML.
             $reminderButtons = null;
@@ -791,6 +793,8 @@ class DavListener implements IEventListener
                 isset($evt->DESCRIPTION) ? $this->getPhoneFromDescription($evt->DESCRIPTION->getValue()) : '',
                 $doc !== null && $doc->attendeeNameMissing
             );
+
+        $this->prependSharedMailHeader($tmpl, $settings, $mailVars);
 
         if ($hint === HintVar::APPT_BOOK) {
             // Just booked, send email to the attendee requesting confirmation...
@@ -1288,6 +1292,7 @@ class DavListener implements IEventListener
                     $doc !== null && $doc->attendeeNameMissing
                 );
                 $orgVars['status'] = $om_prefix;
+                $this->prependSharedMailHeader($tmpl, $settings, $orgVars);
                 $tmpl->setSubject($this->customSubject($settings, BackendUtils::MAILORGANIZERSUBJECT,
                     $om_prefix . ": " . $to_name . ", "
                     . $utils->getDateTimeString($evt_dt, $utz_info, 1, $organizerL10n), $orgVars));
@@ -1594,7 +1599,7 @@ class DavListener implements IEventListener
         if (trim($raw) === '') {
             return;
         }
-        $html = HtmlTemplate::render($raw, $vars);
+        $html = HtmlTemplate::render($raw, $vars, true);
         if (trim($html) === '') {
             return;
         }
@@ -1622,6 +1627,21 @@ class DavListener implements IEventListener
         return [$email, $name, $phone];
     }
 
+
+    /**
+     * Header shared across all email types, rendered above all body text.
+     * It is sanitized and supports the same variables as custom email HTML.
+     */
+    private function prependSharedMailHeader(
+        IEMailTemplate $template, array $settings, array $vars
+    ): void {
+        $header = trim((string)($settings[BackendUtils::MAILHEADERHTML] ?? ''));
+        if ($header === '') {
+            return;
+        }
+        $header = str_replace('{{confirmationButtons}}', '', $header);
+        $this->appendCustomBodyFragment($template, $header, $vars);
+    }
 
     /**
      * Footer shared across all email types, without exposing action buttons.

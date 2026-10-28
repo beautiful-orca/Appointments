@@ -395,7 +395,7 @@ class StateController extends Controller
     private function getValidator(string $prop): ?\Closure
     {
         return match ($prop) {
-            BackendUtils::MAILBOOKINGHTML, BackendUtils::MAILCONFIRMEDHTML, BackendUtils::MAILCANCELLEDHTML, BackendUtils::MAILUPDATEDHTML, BackendUtils::MAILREMINDERHTML, BackendUtils::MAILORGANIZERHTML, BackendUtils::MAILFOOTERHTML, BackendUtils::PAGEINTROHTML, BackendUtils::PAGEOUTROHTML, BackendUtils::PAGEPENDINGHTML, BackendUtils::PAGECONFIRMEDHTML, BackendUtils::PAGECANCELLEDHTML, BackendUtils::PAGEBEFOREORGHTML, BackendUtils::PAGEBEFOREFORMTITLEHTML, BackendUtils::PAGEBEFOREBUTTONHTML, BackendUtils::PAGEAFTERBUTTONHTML => function (&$value, $pageId, $key): array {
+            BackendUtils::MAILBOOKINGHTML, BackendUtils::MAILCONFIRMEDHTML, BackendUtils::MAILCANCELLEDHTML, BackendUtils::MAILUPDATEDHTML, BackendUtils::MAILREMINDERHTML, BackendUtils::MAILORGANIZERHTML, BackendUtils::MAILFOOTERHTML, BackendUtils::MAILHEADERHTML, BackendUtils::PAGEINTROHTML, BackendUtils::PAGEOUTROHTML, BackendUtils::PAGEPENDINGHTML, BackendUtils::PAGECONFIRMEDHTML, BackendUtils::PAGECANCELLEDHTML, BackendUtils::PAGEBEFOREORGHTML, BackendUtils::PAGEBEFOREFORMTITLEHTML, BackendUtils::PAGEBEFOREBUTTONHTML, BackendUtils::PAGEAFTERBUTTONHTML => function (&$value, $pageId, $key): array {
                 if (!is_string($value) || strlen($value) > 20000) {
                     return [Http::STATUS_BAD_REQUEST, ''];
                 }
